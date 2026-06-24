@@ -1,5 +1,5 @@
 import { Alert, Button, Card, CardContent, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { api } from '../api/client'
 import type { AccountDto, DataRow, ExpenseType, LocationDto } from '../types'
 import { DataPage } from './DataPage'
@@ -39,7 +39,7 @@ export function ExpensesPage() {
   return (
     <Stack spacing={3}>
       <Stack>
-        <Typography variant="h4" fontWeight={800}>Expenses</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>Expenses</Typography>
         <Typography color="text.secondary">Record operating expenses with double-entry ledger postings.</Typography>
       </Stack>
       {message && <Alert severity="success">{message}</Alert>}

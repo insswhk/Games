@@ -1,6 +1,6 @@
 import LockIcon from '@mui/icons-material/Lock'
 import { Alert, Avatar, Box, Button, Card, CardContent, Stack, TextField, Typography } from '@mui/material'
-import { FormEvent, useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
 
@@ -29,9 +29,9 @@ export function LoginPage() {
       <Card sx={{ width: '100%', maxWidth: 420 }}>
         <CardContent>
           <Stack spacing={3} component="form" onSubmit={onSubmit}>
-            <Stack alignItems="center" spacing={1}>
+            <Stack spacing={1} sx={{ alignItems: 'center' }}>
               <Avatar sx={{ bgcolor: 'primary.main' }}><LockIcon /></Avatar>
-              <Typography variant="h5" fontWeight={800}>Game Center CRM</Typography>
+              <Typography variant="h5" sx={{ fontWeight: 800 }}>Game Center CRM</Typography>
               <Typography variant="body2" color="text.secondary">Financial-grade game club operations</Typography>
             </Stack>
             {error && <Alert severity="error">{error}</Alert>}

@@ -39,17 +39,17 @@ export function ReportsPage() {
   return (
     <Stack spacing={3}>
       <Stack>
-        <Typography variant="h4" fontWeight={800}>Reports</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>Reports</Typography>
         <Typography color="text.secondary">Filter financial reports by date range, location, cashier, and game mode.</Typography>
       </Stack>
       <Card>
         <CardContent>
           <Grid container spacing={2}>
             <Grid size={{ xs: 12, md: 2 }}>
-              <TextField fullWidth type="datetime-local" label="From" InputLabelProps={{ shrink: true }} value={filters.from} onChange={(event) => setFilters({ ...filters, from: event.target.value })} />
+              <TextField fullWidth type="datetime-local" label="From" slotProps={{ inputLabel: { shrink: true } }} value={filters.from} onChange={(event) => setFilters({ ...filters, from: event.target.value })} />
             </Grid>
             <Grid size={{ xs: 12, md: 2 }}>
-              <TextField fullWidth type="datetime-local" label="To" InputLabelProps={{ shrink: true }} value={filters.to} onChange={(event) => setFilters({ ...filters, to: event.target.value })} />
+              <TextField fullWidth type="datetime-local" label="To" slotProps={{ inputLabel: { shrink: true } }} value={filters.to} onChange={(event) => setFilters({ ...filters, to: event.target.value })} />
             </Grid>
             <Grid size={{ xs: 12, md: 2 }}>
               <TextField select fullWidth label="Location" value={filters.locationId} onChange={(event) => setFilters({ ...filters, locationId: event.target.value })}>
@@ -118,11 +118,11 @@ function SummaryCard({ title, row }: { title: string; row: DataRow | null }) {
   return (
     <Card className="data-section">
       <CardContent>
-        <Typography variant="h6" fontWeight={800}>{title}</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 800 }}>{title}</Typography>
         {row ? Object.entries(row).map(([key, value]) => (
-          <Stack key={key} direction="row" justifyContent="space-between" sx={{ py: 0.5 }}>
+          <Stack key={key} direction="row" sx={{ py: 0.5, justifyContent: 'space-between' }}>
             <Typography color="text.secondary">{key}</Typography>
-            <Typography fontWeight={700}>{String(value)}</Typography>
+            <Typography sx={{ fontWeight: 700 }}>{String(value)}</Typography>
           </Stack>
         )) : <Typography color="text.secondary">Run filters to calculate this report.</Typography>}
       </CardContent>

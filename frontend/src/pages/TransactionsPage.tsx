@@ -1,5 +1,5 @@
 import { Alert, Button, Card, CardContent, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { api } from '../api/client'
 import type { CashierDto, CustomerDto, GameModeDto, LocationDto, ShiftType, TransactionType } from '../types'
 
@@ -54,7 +54,7 @@ export function TransactionsPage() {
   return (
     <Stack spacing={3}>
       <Stack>
-        <Typography variant="h4" fontWeight={800}>Transactions</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>Transactions</Typography>
         <Typography color="text.secondary">Post Add Money, Withdraw Money, and Bonus Point entries through the transaction engine.</Typography>
       </Stack>
       {message && <Alert severity="success">{message}</Alert>}

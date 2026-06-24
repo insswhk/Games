@@ -52,7 +52,7 @@ function DrawerContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Toolbar sx={{ alignItems: 'flex-start', flexDirection: 'column', py: 2 }}>
-        <Typography variant="h6" fontWeight={800}>Game Center CRM</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 800 }}>Game Center CRM</Typography>
         <Typography variant="body2" color="text.secondary">{user?.fullName} · {user?.role}</Typography>
       </Toolbar>
       <Divider />

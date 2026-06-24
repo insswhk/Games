@@ -24,7 +24,7 @@ export function DataPage({ title, description, endpoint, columns }: DataPageProp
   return (
     <Stack spacing={3}>
       <Stack>
-        <Typography variant="h4" fontWeight={800}>{title}</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>{title}</Typography>
         <Typography color="text.secondary">{description}</Typography>
       </Stack>
       {error && <Alert severity="error">{error}</Alert>}

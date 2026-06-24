@@ -5,7 +5,7 @@ export function BonusPointsPage() {
   return (
     <Stack spacing={3}>
       <Stack>
-        <Typography variant="h4" fontWeight={800}>Bonus Points</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>Bonus Points</Typography>
         <Typography color="text.secondary">Reportable bonus points issued by customer.</Typography>
       </Stack>
       <DataPage

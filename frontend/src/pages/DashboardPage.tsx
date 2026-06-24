@@ -30,7 +30,7 @@ export function DashboardPage() {
   return (
     <Stack spacing={3}>
       <Stack>
-        <Typography variant="h4" fontWeight={800}>Dashboard</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>Dashboard</Typography>
         <Typography color="text.secondary">Live KPIs for cashier activity, customer balances, and games.</Typography>
       </Stack>
       <Grid container spacing={2}>
@@ -38,10 +38,10 @@ export function DashboardPage() {
           <Grid key={card.label} size={{ xs: 12, sm: 6, lg: 4 }}>
             <Card>
               <CardContent>
-                <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                   <Stack>
                     <Typography variant="body2" color="text.secondary">{card.label}</Typography>
-                    <Typography variant="h4" fontWeight={800}>{card.value}</Typography>
+                    <Typography variant="h4" sx={{ fontWeight: 800 }}>{card.value}</Typography>
                   </Stack>
                   {card.icon}
                 </Stack>
