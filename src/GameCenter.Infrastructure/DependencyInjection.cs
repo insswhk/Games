@@ -11,7 +11,15 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<GameCenterDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        {
+            if (bool.TryParse(configuration["UseInMemoryDatabase"], out var useInMemoryDatabase) && useInMemoryDatabase)
+            {
+                options.UseInMemoryDatabase("GameCenterPreview");
+                return;
+            }
+
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+        });
 
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
