@@ -138,6 +138,16 @@ public sealed class GameCenterDbContext(DbContextOptions<GameCenterDbContext> op
             entity.Property(x => x.PurchaseAmount).HasPrecision(18, 2);
             entity.Property(x => x.MaintenanceCosts).HasPrecision(18, 2);
         });
+
+        // SQL Server rejects multiple cascade paths (e.g. Location -> Transactions
+        // directly and via Customer/Cashier). Relax convention cascade deletes to
+        // Restrict so the relational schema can be created.
+        foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
+                     .SelectMany(entityType => entityType.GetForeignKeys())
+                     .Where(foreignKey => foreignKey.DeleteBehavior == DeleteBehavior.Cascade))
+        {
+            foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+        }
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
