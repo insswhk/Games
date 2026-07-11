@@ -4,6 +4,7 @@ import { AppLayout } from './layout/AppLayout'
 import { BonusPointsPage } from './pages/BonusPointsPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { DataPage } from './pages/DataPage'
+import { DocumentationPage } from './pages/DocumentationPage'
 import { ExpensesPage } from './pages/ExpensesPage'
 import { LoginPage } from './pages/LoginPage'
 import { ReportsPage } from './pages/ReportsPage'
@@ -69,6 +70,8 @@ export default function App() {
           { key: 'lastMaintenanceDate', label: 'Last Maintenance' },
         ]} />} />
         <Route path="reports" element={<ReportsPage />} />
+        <Route path="documentation" element={<DocumentationPage />} />
+        <Route path="documentation/:slug" element={<DocumentationPage />} />
       </Route>
     </Routes>
   )

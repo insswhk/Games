@@ -5,6 +5,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import GroupIcon from '@mui/icons-material/Group'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import LogoutIcon from '@mui/icons-material/Logout'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
 import MenuIcon from '@mui/icons-material/Menu'
 import PaymentsIcon from '@mui/icons-material/Payments'
 import PersonIcon from '@mui/icons-material/Person'
@@ -43,6 +44,7 @@ const navItems = [
   { label: 'Expenses', form: 'Expenses', path: '/expenses', icon: <PaymentsIcon /> },
   { label: 'Games Register', form: 'Games', path: '/games', icon: <CasinoIcon /> },
   { label: 'Reports', form: 'Reports', path: '/reports', icon: <AssessmentIcon /> },
+  { label: 'Documentation', form: 'Documentation', path: '/documentation', icon: <MenuBookIcon /> },
 ]
 
 function DrawerContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -62,7 +64,7 @@ function DrawerContent({ onNavigate }: { onNavigate?: () => void }) {
             key={item.path}
             component={Link}
             to={item.path}
-            selected={location.pathname === item.path}
+            selected={location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(`${item.path}/`))}
             onClick={onNavigate}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
