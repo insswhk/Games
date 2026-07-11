@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2040CC3D-4096-4768-AC3C-C6285BA84D9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCenter.Domain", "src\GameCenter.Domain\GameCenter.Domain.csproj", "{9770BA20-270A-46EE-870B-AFA892825354}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCenter.Application", "src\GameCenter.Application\GameCenter.Application.csproj", "{6B344AFC-B699-4661-8030-8154E6CDE06A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCenter.Infrastructure", "src\GameCenter.Infrastructure\GameCenter.Infrastructure.csproj", "{08317EFF-E181-44D4-9307-FA0933C0F8E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCenter.Api", "src\GameCenter.Api\GameCenter.Api.csproj", "{0E36CA34-D267-4FB2-92D1-18914DF3F7C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6F6626F2-11AD-47FF-937A-F6C1F62C5944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCenter.Tests", "tests\GameCenter.Tests\GameCenter.Tests.csproj", "{ECF1F2E9-9233-4C77-8039-049E26E45B41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9770BA20-270A-46EE-870B-AFA892825354}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9770BA20-270A-46EE-870B-AFA892825354}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9770BA20-270A-46EE-870B-AFA892825354}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9770BA20-270A-46EE-870B-AFA892825354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B344AFC-B699-4661-8030-8154E6CDE06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B344AFC-B699-4661-8030-8154E6CDE06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B344AFC-B699-4661-8030-8154E6CDE06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B344AFC-B699-4661-8030-8154E6CDE06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08317EFF-E181-44D4-9307-FA0933C0F8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08317EFF-E181-44D4-9307-FA0933C0F8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08317EFF-E181-44D4-9307-FA0933C0F8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08317EFF-E181-44D4-9307-FA0933C0F8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E36CA34-D267-4FB2-92D1-18914DF3F7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E36CA34-D267-4FB2-92D1-18914DF3F7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E36CA34-D267-4FB2-92D1-18914DF3F7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E36CA34-D267-4FB2-92D1-18914DF3F7C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF1F2E9-9233-4C77-8039-049E26E45B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF1F2E9-9233-4C77-8039-049E26E45B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF1F2E9-9233-4C77-8039-049E26E45B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF1F2E9-9233-4C77-8039-049E26E45B41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9770BA20-270A-46EE-870B-AFA892825354} = {2040CC3D-4096-4768-AC3C-C6285BA84D9D}
+		{6B344AFC-B699-4661-8030-8154E6CDE06A} = {2040CC3D-4096-4768-AC3C-C6285BA84D9D}
+		{08317EFF-E181-44D4-9307-FA0933C0F8E9} = {2040CC3D-4096-4768-AC3C-C6285BA84D9D}
+		{0E36CA34-D267-4FB2-92D1-18914DF3F7C1} = {2040CC3D-4096-4768-AC3C-C6285BA84D9D}
+		{ECF1F2E9-9233-4C77-8039-049E26E45B41} = {6F6626F2-11AD-47FF-937A-F6C1F62C5944}
+	EndGlobalSection
+EndGlobal

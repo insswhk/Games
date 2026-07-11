@@ -1,0 +1,131 @@
+import { Button, Card, CardContent, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { api, toQuery } from '../api/client'
+import type { CashierDto, DataRow, GameModeDto, LocationDto } from '../types'
+import { DataPage } from './DataPage'
+
+export function ReportsPage() {
+  const [locations, setLocations] = useState<LocationDto[]>([])
+  const [cashiers, setCashiers] = useState<CashierDto[]>([])
+  const [gameModes, setGameModes] = useState<GameModeDto[]>([])
+  const [filters, setFilters] = useState({ from: '', to: '', locationId: '', cashierId: '', gameModeId: '' })
+  const [query, setQuery] = useState('')
+  const [income, setIncome] = useState<DataRow | null>(null)
+  const [balance, setBalance] = useState<DataRow | null>(null)
+
+  useEffect(() => {
+    Promise.all([
+      api.get<LocationDto[]>('/master-data/locations'),
+      api.get<CashierDto[]>('/master-data/cashiers'),
+      api.get<GameModeDto[]>('/master-data/game-modes'),
+    ]).then(([locationResponse, cashierResponse, modeResponse]) => {
+      setLocations(locationResponse.data)
+      setCashiers(cashierResponse.data)
+      setGameModes(modeResponse.data)
+    })
+  }, [])
+
+  async function runReports() {
+    const nextQuery = toQuery(filters)
+    setQuery(nextQuery ? `?${nextQuery}` : '')
+    const [incomeResponse, balanceResponse] = await Promise.all([
+      api.get<DataRow>(`/reports/profit-loss${nextQuery ? `?${nextQuery}` : ''}`),
+      api.get<DataRow>(`/reports/balance-sheet${nextQuery ? `?${nextQuery}` : ''}`),
+    ])
+    setIncome(incomeResponse.data)
+    setBalance(balanceResponse.data)
+  }
+
+  return (
+    <Stack spacing={3}>
+      <Stack>
+        <Typography variant="h4" sx={{ fontWeight: 800 }}>Reports</Typography>
+        <Typography color="text.secondary">Filter financial reports by date range, location, cashier, and game mode.</Typography>
+      </Stack>
+      <Card>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, md: 2 }}>
+              <TextField fullWidth type="datetime-local" label="From" slotProps={{ inputLabel: { shrink: true } }} value={filters.from} onChange={(event) => setFilters({ ...filters, from: event.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, md: 2 }}>
+              <TextField fullWidth type="datetime-local" label="To" slotProps={{ inputLabel: { shrink: true } }} value={filters.to} onChange={(event) => setFilters({ ...filters, to: event.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, md: 2 }}>
+              <TextField select fullWidth label="Location" value={filters.locationId} onChange={(event) => setFilters({ ...filters, locationId: event.target.value })}>
+                <MenuItem value="">All</MenuItem>
+                {locations.map((location) => <MenuItem key={location.id} value={location.id}>{location.clubName}</MenuItem>)}
+              </TextField>
+            </Grid>
+            <Grid size={{ xs: 12, md: 2 }}>
+              <TextField select fullWidth label="Cashier" value={filters.cashierId} onChange={(event) => setFilters({ ...filters, cashierId: event.target.value })}>
+                <MenuItem value="">All</MenuItem>
+                {cashiers.map((cashier) => <MenuItem key={cashier.id} value={cashier.id}>{cashier.cashierCode}</MenuItem>)}
+              </TextField>
+            </Grid>
+            <Grid size={{ xs: 12, md: 2 }}>
+              <TextField select fullWidth label="Game Mode" value={filters.gameModeId} onChange={(event) => setFilters({ ...filters, gameModeId: event.target.value })}>
+                <MenuItem value="">All</MenuItem>
+                {gameModes.map((mode) => <MenuItem key={mode.id} value={mode.id}>{mode.code} · {mode.name}</MenuItem>)}
+              </TextField>
+            </Grid>
+            <Grid size={{ xs: 12, md: 2 }}>
+              <Button fullWidth variant="contained" sx={{ height: '100%' }} onClick={runReports}>Run</Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <SummaryCard title="Profit & Loss" row={income} />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <SummaryCard title="Balance Sheet" row={balance} />
+        </Grid>
+      </Grid>
+      <DataPage
+        title="Cashier Cash Register Report"
+        description="Cash in, cash out, and net cash by cashier."
+        endpoint={`/reports/cashier-cash-register${query}`}
+        columns={[
+          { key: 'cashierCode', label: 'Cashier Code' },
+          { key: 'cashierName', label: 'Cashier' },
+          { key: 'totalCashIn', label: 'Cash In' },
+          { key: 'totalCashOut', label: 'Cash Out' },
+          { key: 'netCash', label: 'Net Cash' },
+        ]}
+      />
+      <DataPage
+        title="General Ledger"
+        description="Ledger entries generated by transactions and expenses."
+        endpoint={`/reports/general-ledger${query}`}
+        columns={[
+          { key: 'entryDate', label: 'Date' },
+          { key: 'accountNumber', label: 'Account #' },
+          { key: 'accountName', label: 'Account' },
+          { key: 'accountType', label: 'Type' },
+          { key: 'locationName', label: 'Location' },
+          { key: 'debit', label: 'Debit' },
+          { key: 'credit', label: 'Credit' },
+          { key: 'description', label: 'Description' },
+        ]}
+      />
+    </Stack>
+  )
+}
+
+function SummaryCard({ title, row }: { title: string; row: DataRow | null }) {
+  return (
+    <Card className="data-section">
+      <CardContent>
+        <Typography variant="h6" sx={{ fontWeight: 800 }}>{title}</Typography>
+        {row ? Object.entries(row).map(([key, value]) => (
+          <Stack key={key} direction="row" sx={{ py: 0.5, justifyContent: 'space-between' }}>
+            <Typography color="text.secondary">{key}</Typography>
+            <Typography sx={{ fontWeight: 700 }}>{String(value)}</Typography>
+          </Stack>
+        )) : <Typography color="text.secondary">Run filters to calculate this report.</Typography>}
+      </CardContent>
+    </Card>
+  )
+}

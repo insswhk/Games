@@ -1,0 +1,22 @@
+html {
+  min-width: 320px;
+  background: #f4f6f8;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.data-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 520px;
+}
